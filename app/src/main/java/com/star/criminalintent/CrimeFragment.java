@@ -10,6 +10,7 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.provider.MediaStore;
@@ -223,10 +224,20 @@ public class CrimeFragment extends Fragment {
                 });
 
         mPhotoView.setOnClickListener(v -> {
-            FragmentManager fragmentManager = getFragmentManager();
-            DetailDisplayFragment detailDisplayFragment =
-                    DetailDisplayFragment.newInstance(mPhotoFile.getPath());
-            detailDisplayFragment.show(fragmentManager, DIALOG_DETAIL_DISPLAY);
+            if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                FragmentManager fragmentManager = getFragmentManager();
+
+                if (fragmentManager == null) {
+                    return;
+                }
+
+                DetailDisplayFragment detailDisplayFragment =
+                        DetailDisplayFragment.newInstance(mPhotoFile.getPath());
+                detailDisplayFragment.show(fragmentManager, DIALOG_DETAIL_DISPLAY);
+            } else {
+                Intent intent = ImageActivity.newIntent(getActivity(), mPhotoFile.getPath());
+                ImageActivity.startWithTransition(getActivity(), intent, mPhotoView);
+            }
         });
 
         final Intent captureImageIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);

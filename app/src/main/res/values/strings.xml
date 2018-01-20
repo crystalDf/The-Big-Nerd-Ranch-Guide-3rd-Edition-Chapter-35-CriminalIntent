@@ -44,6 +44,8 @@
     <string name="formatted_time">"HH:mm"</string>
     <string name="formatted_date_in_report">"EEE, MMM d"</string>
 
+    <string name="image">Image</string>
+
     <plurals name="subtitle_plural">
         <item quantity="one">%1$s crime</item>
         <item quantity="other">%1$s crimes</item>

@@ -26,6 +26,7 @@
         </activity>
         <activity android:name=".DatePickerActivity" />
         <activity android:name=".TimePickerActivity" />
+        <activity android:name=".ImageActivity" />
         
         <provider
             android:authorities="com.star.criminalintent.fileprovider"
